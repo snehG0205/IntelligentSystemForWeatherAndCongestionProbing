@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style type="text/css">
+       .wrapper{
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
+       } 
+
+      </style>
+    </head>
+
+    <body class="blue lighten-3" background="{{url_for('static', filename='images/backg3.jpg')}}">
+      <div class="wrapper"> 
+        <div class="row">
+          <div class="col s10 m8 l2 offset-l3 offset-m2 offset-s1">
+           <div class="card">
+              <div class="card-image">
+                <img id="imgDay1">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4">TODAY</span>
+                <p id="valueForDay1">The average temperature today will be {{temp_var_1}}F.<br>The probability for rainfall is {{rain_var_1}}%.<br>Your day today will {{day_var_1}}.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay2">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day2"></span>
+                <p id="valueForDay2">The average temperature today will be {{temp_var_2}}F.<br>The probability for rainfall is {{rain_var_2}}%.<br>Your day today will {{day_var_2}}.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay3">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day3"></span>
+                <p id="valueForDay3">The average temperature today will be {{temp_var_3}}F.<br>The probability for rainfall is {{rain_var_3}}%.<br>Your day today will {{day_var_3}}.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10 m8 l2 offset-l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay4">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day4"></span>
+                <p id="valueForDay4">The average temperature today will be {{temp_var_4}}F.<br>The probability for rainfall is {{rain_var_4}}%.<br>Your day today will {{day_var_4}}.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+           <div class="card">
+              <div class="card-image">
+                <img id="imgDay5">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day5"></span>
+                <p id="valueForDay5">The average temperature today will be {{temp_var_5}}F.<br>The probability for rainfall is {{rain_var_5}}%.<br>Your day today will {{day_var_5}}.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay6">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day6"></span>
+                <p id="valueForDay6">The average temperature today will be {{temp_var_6}}F.<br>The probability for rainfall is {{rain_var_6}}%.<br>Your day today will {{day_var_6}}.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay7">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day7"></span>
+                <p id="valueForDay7">The average temperature today will be {{temp_var_7}}F.<br>The probability for rainfall is {{rain_var_7}}%.<br>Your day today will {{day_var_7}}.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="{{url_for('static', filename='js/materialize.min.js') }}"></script>
+      <script type="text/javascript">
+        var d = new Date();
+        var n = d.getDay();
+        var days = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
+
+        var i, index=n-1;
+        var new_days = new Array();
+        for(i=0;i<days.length;i++)
+        {
+          new_days[i] = days[(index+i)%7];
+          console.log(new_days[i]);
+        }
+
+        document.getElementById("Day2").innerHTML = new_days[1];
+        document.getElementById("Day3").innerHTML = new_days[2];
+        document.getElementById("Day4").innerHTML = new_days[3];
+        document.getElementById("Day5").innerHTML = new_days[4];
+        document.getElementById("Day6").innerHTML = new_days[5];
+        document.getElementById("Day7").innerHTML = new_days[6];
+
+
+
+        // to replace proper gifs
+        var v1 = document.getElementById("valueForDay1").textContent;
+        if (v1.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v1.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v1.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v1.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+
+
+        var v2 = document.getElementById("valueForDay2").textContent;
+        if (v2.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v2.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v2.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v2.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+
+
+        var v3 = document.getElementById("valueForDay3").textContent;
+        if (v3.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v3.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v3.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v3.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+
+
+        var v4 = document.getElementById("valueForDay4").textContent;
+        if (v4.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v4.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v4.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v4.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+
+
+        var v5 = document.getElementById("valueForDay5").textContent;
+        if (v5.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v5.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v5.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v5.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+
+
+        var v6 = document.getElementById("valueForDay6").textContent;
+        if (v6.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v6.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v6.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v6.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+
+
+        var v7 = document.getElementById("valueForDay7").textContent;
+        if (v7.includes("sunny")) {
+          console.log("sunny");
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/sunny.gif')}}";
+        }
+        if (v7.includes("overcast")) {
+          console.log("overcast")
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/overcast.gif')}}";
+        } 
+        if (v7.includes("thunderstorms")) {
+          console.log("thunderstorms")
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/thunder.gif')}}";
+        }
+        if (v7.includes("rains")) {
+          console.log("rains")
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/rain.gif')}}";
+        }
+      </script>
+    </body>
+  </html>

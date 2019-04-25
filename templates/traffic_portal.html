@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style type="text/css">
+       .wrapper{
+        padding-top: 1.5%;
+        padding-bottom: 1.5%;
+       } 
+       b{
+        color: red;
+       }
+       @media only screen and (min-width: 1000px) {
+         img{
+          height:225px;
+          width:225px;
+         }
+        }
+      </style>
+    </head>
+
+    <body class="light-green lighten-2" background="{{url_for('static', filename='images/backg.jpg')}}">
+      <div class="wrapper"> 
+        <div class="row">
+          <div class="col s10 m8 l2 offset-l3 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay1">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4">TODAY</span>
+                <p id="valueForDay1">The travel time for today is around <b><u>{{time_var_1}}</u></b> minutes.<br>The traffic is {{traff_var_1}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay2">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day2"></span>
+                <p id="valueForDay2">The travel time for today is around <b><u>{{time_var_2}}</u></b> minutes.<br>The traffic is {{traff_var_2}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay3">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day3"></span>
+                <p id="valueForDay3">The travel time for today is around <b><u>{{time_var_3}}</u></b> minutes.<br>The traffic is {{traff_var_3}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s10 m8 l2 offset-l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay4">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day4"></span>
+                <p id="valueForDay4">The travel time for today is around <b><u>{{time_var_4}}</u></b> minutes.<br>The traffic is {{traff_var_4}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay5">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day5"></span>
+                <p id="valueForDay5">The travel time for today is around <b><u>{{time_var_5}}</u></b> minutes.<br>The traffic is {{traff_var_5}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay6">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day6"></span>
+                <p id="valueForDay6">The travel time for today is around <b><u>{{time_var_6}}</u></b> minutes.<br>The traffic is {{traff_var_6}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 m8 l2 offset-m2 offset-s1">
+            <div class="card">
+              <div class="card-image">
+                <img id="imgDay7">
+              </div>
+              <div class="card-content">
+                <span class="card-title grey-text text-darken-4" id="Day7"></span>
+                <p id="valueForDay7">The travel time for today is around <b><u>{{time_var_7}}</u></b> minutes.<br>The traffic is {{traff_var_7}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+     
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="{{url_for('static', filename='js/materialize.min.js') }}"></script>
+      <script type="text/javascript">
+        var d = new Date();
+        var n = d.getDay();
+        var days = ["MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY"];
+
+        var i, index=n-1;
+        var new_days = new Array();
+        for(i=0;i<days.length;i++)
+        {
+          new_days[i] = days[(index+i)%7];
+          console.log(new_days[i]);
+        }
+
+        document.getElementById("Day2").innerHTML = new_days[1];
+        document.getElementById("Day3").innerHTML = new_days[2];
+        document.getElementById("Day4").innerHTML = new_days[3];
+        document.getElementById("Day5").innerHTML = new_days[4];
+        document.getElementById("Day6").innerHTML = new_days[5];
+        document.getElementById("Day7").innerHTML = new_days[6];
+        // use this to replace proper images
+
+        var v1 = document.getElementById("valueForDay1").textContent;
+        if (v1.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v1.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v1.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay1").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+
+        var v2 = document.getElementById("valueForDay2").textContent;
+        if (v2.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v2.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v2.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay2").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+
+        var v3 = document.getElementById("valueForDay3").textContent;
+        if (v3.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v3.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v3.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay3").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+
+        var v4 = document.getElementById("valueForDay4").textContent;
+        if (v4.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v4.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v4.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay4").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+
+        var v5 = document.getElementById("valueForDay5").textContent;
+        if (v5.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v5.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v5.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay5").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+
+        var v6 = document.getElementById("valueForDay6").textContent;
+        if (v6.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v6.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v6.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay6").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+
+        var v7 = document.getElementById("valueForDay7").textContent;
+        if (v7.includes("high")) {
+          console.log("high");
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/high_traff.gif')}}";
+        }
+        if (v7.includes("low")) {
+          console.log("low")
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/low_traff.gif')}}";
+        } 
+        if (v7.includes("moderate")) {
+          console.log("moderate")
+          document.getElementById("imgDay7").src="{{url_for('static', filename='images/mod_traff.gif')}}";
+        }
+      </script>
+    </body>
+  </html>
